@@ -1,0 +1,5 @@
+{
+  "name": "clawd-audit-md",
+  "description": "Audite les fichiers d'instructions d'un projet, confronte chaque affirmation au code réel, et redistribue le contenu entre la racine, docs/ et archives/.",
+  "version": "1.0.0"
+}

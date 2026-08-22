@@ -1,0 +1,14 @@
+{
+  "name": "clawd-audit-md",
+  "owner": {
+    "name": "fullya99"
+  },
+  "plugins": [
+    {
+      "name": "clawd-audit-md",
+      "source": "./",
+      "description": "Audite les fichiers d'instructions d'un projet, confronte chaque affirmation au code réel, et redistribue le contenu entre la racine, docs/ et archives/.",
+      "version": "1.0.0"
+    }
+  ]
+}
