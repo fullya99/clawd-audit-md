@@ -1,5 +1,5 @@
 ---
-description: Audite le CLAUDE.md ou l'AGENTS.md du projet, confronte chaque affirmation au code, et propose une redistribution avant d'écrire.
+description: Raccourcit le CLAUDE.md du projet en sortant le détail vers des fiches, des règles ou des skills, avec une preuve à côté de chaque coupe.
 argument-hint: [fichier ou dossier à auditer, vide = le dépôt courant]
 ---
 
@@ -8,7 +8,8 @@ Cible de l'audit : $ARGUMENTS
 Lance le skill **clawd-audit-md**.
 
 Lis d'abord son `SKILL.md`, puis applique les six phases dans l'ordre : inventaire, vérification
-contre le code, classement, contradictions, restructuration, rapport. Charge le skill
+contre le code, classement, contradictions, restructuration, rapport. **Le but est de raccourcir**,
+la vérification sert à rendre les coupes défendables. Charge le skill
 `style-redaction` avant d'écrire la moindre ligne, et les références du skill seulement quand une
 phase les demande.
 

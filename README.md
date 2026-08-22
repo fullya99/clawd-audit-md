@@ -1,24 +1,37 @@
 # clawd-audit-md
 
-Un plugin qui range les fichiers d'instructions d'un projet. Il lit ton `CLAUDE.md` ou ton
-`AGENTS.md`, va chercher dans le code ce qui confirme ou contredit chaque ligne, et te rend un
-plan de redistribution : ce qui reste à la racine, ce qui part en fiche, ce qui s'archive, ce qui
-se supprime. Rien ne s'écrit avant que tu aies dit oui.
+**Il raccourcit ton `CLAUDE.md`.** Il le lit, va chercher dans le code ce qui confirme ou
+contredit chaque ligne, et te rend un plan : ce qui reste à la racine, ce qui sort, où ça sort, ce
+qui s'archive, ce qui se supprime. Rien ne s'écrit avant que tu aies dit oui.
 
-Le problème qu'il règle : ces fichiers grossissent tout seuls. Personne ne relit les lignes du
-haut, et au bout de six mois le fichier décrit un projet qui n'existe plus. Chaque ligne fausse se
-paie deux fois, en tokens à chaque session et en erreurs que l'agent commet parce qu'il y croit.
+Le problème qu'il règle : ce fichier grossit tout seul et il est chargé en entier à chaque
+session, avant ta première question. Chaque ligne est donc payée pour toujours, qu'elle serve ou
+non. Au-delà de 200 lignes la doc officielle annonce une baisse d'obéissance, à 40 000 caractères
+l'outil affiche un avertissement. Et personne ne relit les lignes du haut, donc au bout de six mois
+le fichier décrit un projet qui n'existe plus.
 
 ## Ce qu'il fait, et que les autres ne font pas
 
-Il confronte au code. Un chemin cité doit exister, une commande citée doit être dans le
-`package.json` ou le `Makefile`, un glob de règle doit matcher au moins un fichier, une convention
-décrite se compte sur un échantillon. Une affirmation contredite est marquée fausse **avec sa
-preuve**. Une affirmation qu'il n'arrive pas à trancher est marquée non vérifiable et ne bouge
-pas, jamais fausse par défaut.
+**Il sait où sortir un bloc, et les sorties ne se valent pas.** Il y a quatre étages :
 
-Le reste suit : classement bloc par bloc, liste des règles qui se contredisent, fichier racine
-ramené sous 100 lignes, fiches `docs/` pour le détail, en-tête daté pour ce qui s'archive.
+| Étage | Quand ça charge |
+|---|---|
+| `CLAUDE.md` | chaque session, toujours |
+| `.claude/rules/<sujet>.md` avec `paths:` | tout seul, quand Claude touche un fichier qui matche |
+| un skill | quand Claude reconnaît le cas dans sa description |
+| `docs/<sujet>.md`, lien depuis la racine | seulement si Claude décide d'ouvrir le lien |
+
+La règle qui tranche : une contrainte qui doit être **appliquée** ne va jamais dans une fiche liée,
+un lien nu ne garantit rien. Elle va en règle liée à des chemins, ou en skill. La fiche porte ce
+qu'on consulte. Et si aucune sortie ne la tient, elle reste à la racine, même si ça allonge.
+
+Au passage, il te dira que tes `@import` n'allègent rien. Un import colle le contenu dans le
+fichier racine au démarrage, c'est le contresens le plus répandu sur le sujet.
+
+**Et il ne coupe rien sans preuve.** Un chemin cité doit exister, une commande citée doit être dans
+le `package.json` ou le `Makefile`, un glob de règle doit matcher au moins un fichier, une
+convention décrite se compte sur un échantillon. Une ligne contredite est marquée fausse **avec sa
+preuve**. Une ligne qu'il n'arrive pas à trancher est marquée non vérifiable, et elle ne bouge pas.
 
 ## Installation
 
