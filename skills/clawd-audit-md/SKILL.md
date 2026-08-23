@@ -1,6 +1,7 @@
 ---
 name: clawd-audit-md
 description: "Raccourcit le CLAUDE.md d'un projet en sortant le détail vers des fiches liées, des règles liées à des chemins ou des skills, pour que la racine ne porte plus que ce qui doit être vrai à chaque session. Confronte chaque ligne au code réel avant de la déplacer, avec une preuve à côté de chaque coupe, et ne touche pas à ce qu'il ne peut pas vérifier. Traite aussi les AGENTS.md et les fichiers de sous-agents. N'écrit rien tant que le rapport n'a pas été validé. Se déclenche sur : mon CLAUDE.md est trop long, optimise mon CLAUDE.md, allège mes instructions, audit CLAUDE.md, sortir le contenu vers docs, est-ce que les règles sont encore vraies, CLAUDE.md obsolète, nettoyer AGENTS.md, réduire le contexte charge à chaque session, /audit-md."
+version: 1.1.1
 ---
 
 # Clawd audit md

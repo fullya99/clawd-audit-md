@@ -60,6 +60,45 @@ Par une installation à la main, la commande `/audit-md` ne suit pas, elle n'exi
 installation plugin chez Claude Code. Le skill se déclenche quand même sur une demande en
 français, par exemple « audite mon CLAUDE.md ».
 
+## Mise à jour
+
+**Rien ne se met à jour tout seul, et deux choses sont figées, pas une.** Le clone du marketplace
+reste au commit du jour où tu l'as ajouté, et la version installée reste celle du jour de
+l'installation. L'auto-update existe, mais il est désactivé par défaut sur les marketplaces
+tierces, donc sur celui-ci. Tu peux croire tourner sur la dernière version pendant des semaines.
+
+```bash
+claude plugin marketplace update clawd-audit-md
+claude plugin update clawd-audit-md@clawd-audit-md
+```
+
+Puis redémarre Claude Code, le CLI le dit lui-même. En session ouverte, `/reload-plugins` suffit
+souvent, et s'il avertit qu'il va relire la conversation, relance-le en `/reload-plugins --force`.
+
+L'ordre compte : sans la première commande, la seconde cherche la nouvelle version dans un
+catalogue qui ne la connaît pas encore.
+
+Vérifie plutôt que de supposer :
+
+```bash
+claude plugin list
+```
+
+Une réinstallation nommée avec son marketplace fait le même travail en une commande, parce qu'elle
+rafraîchit le catalogue avant de chercher, même auto-update désactivé :
+
+```bash
+claude plugin install clawd-audit-md@clawd-audit-md
+```
+
+Ça ne vaut que pour la forme complète. `claude plugin install clawd-audit-md` tout court lit le
+cache sans rafraîchir.
+
+**Pour ne plus y penser**, active l'auto-update une fois : `/plugin`, onglet **Marketplaces**,
+sélectionne `clawd-audit-md`, **Enable auto-update**. Claude Code vérifiera au démarrage et te
+proposera `/reload-plugins` si quelque chose a bougé. La session en cours garde ce qu'elle a chargé
+au lancement, c'est voulu.
+
 ## Usage
 
 ```
