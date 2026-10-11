@@ -5,10 +5,15 @@
   },
   "plugins": [
     {
-      "name": "clawd-audit-md",
-      "source": "./",
-      "description": "Raccourcit le CLAUDE.md d'un projet en sortant le détail vers des fiches, des règles liées à des chemins ou des skills, avec une preuve tirée du code à côté de chaque coupe.",
-      "version": "1.1.1"
+      "name": "clawd-stack",
+      "source": {
+        "source": "github",
+        "repo": "fullya99/clawd-stack"
+      },
+      "description": "Une seule stack de contexte pour tous les projets. Convention à trois piliers, clôture et relance de session, plans sourcés, audit des fichiers d'instructions contre le code, migration des anciennes conventions."
     }
-  ]
+  ],
+  "renames": {
+    "clawd-audit-md": "clawd-stack"
+  }
 }
